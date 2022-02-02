@@ -1,8 +1,13 @@
 import React, {useState} from 'react';
 
-const EmployeesAddForm = ({addEmployees}) => {
+import { useDispatch } from 'react-redux';
+import { addUser } from '../../features/actionCreator';
+
+const EmployeesAddForm = () => {
 
     const [newEmployee, setNewEmployee] = useState({firstName:'',lastName:'',salary:''});
+
+    const dispatch = useDispatch();
 
     const onValueChange = (e) => {
         const newItem = {...newEmployee,[e.target.name]:e.target.value};
@@ -12,7 +17,7 @@ const EmployeesAddForm = ({addEmployees}) => {
     const onSubmit = (e) => {
         e.preventDefault();
         if (newEmployee.firstName.length !== 0 && newEmployee.lastName.length !== 0 && newEmployee.salary.length !== 0) {
-            addEmployees(newEmployee);
+            dispatch(addUser(newEmployee));
             setNewEmployee({firstName:'',lastName:'',salary:''});
         }
     }
