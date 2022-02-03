@@ -17,11 +17,11 @@ const userSlice = createSlice({
             state.users.push(action.payload);
         },
         [deleteUser.fulfilled.type]: (state, action) =>  {
-            state.users = state.users.filter(item => item.id !== action.meta.arg);
+            state.users = state.users.filter(item => item._id !== action.meta.arg);
         },
         [updateUser.fulfilled.type]: (state, action) =>  {
             state.users.forEach(item => {
-                if(item.id === action.payload.id) {
+                if(item._id === action.payload._id) {
                     item = action.payload;
                 }
             });
