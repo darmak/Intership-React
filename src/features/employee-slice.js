@@ -2,13 +2,22 @@ import { createSlice } from '@reduxjs/toolkit';
 import { fetchUsers, deleteUser, updateUser, addUser} from './actionCreator';
 
 const initialState = {
-    users: []
+    users: [],
+    authorization: false,
+    registration: false,
 }
 
 const userSlice = createSlice({
     name: 'user',
     initialState,
-    reducers: {},
+    reducers: {
+        authorizationRoute(state) {
+            state.authorization = !state.authorization;
+        },
+        registrationRoute(state) {
+            state.registration = !state.registration;
+        }
+    },
     extraReducers: {
         [fetchUsers.fulfilled.type]: (state, action) =>  {
             state.users = action.payload;
@@ -29,4 +38,5 @@ const userSlice = createSlice({
     }
 });
 
+export const { registrationRoute, authorizationRoute } = userSlice.actions;
 export default userSlice.reducer;
